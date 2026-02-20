@@ -25,6 +25,8 @@ body {
   color: var(--ink);
   background: var(--bg);
   overflow: hidden;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
 }
 
 .app {
@@ -382,7 +384,7 @@ button:disabled {
   position: absolute;
   left: 0;
   right: 0;
-  top: 8px;
+  top: 14px;
   z-index: 2;
   padding: 0 10px;
   text-align: center;
@@ -391,7 +393,7 @@ button:disabled {
 
 .cover-title-main {
   margin: 0;
-  font-size: clamp(1.4rem, 6.6vw, 2.6rem);
+  font-size: clamp(1.55rem, 7.2vw, 2.85rem);
   letter-spacing: 0.04em;
   line-height: 1.1;
   color: #f8fbff;
