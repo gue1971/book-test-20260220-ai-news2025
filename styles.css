@@ -110,8 +110,8 @@ body {
 .slide-image {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
+  object-fit: initial;
 }
 
 .reader {
@@ -231,28 +231,14 @@ body {
 .text-frame {
   width: 100%;
   height: 100%;
+  padding: 12px;
+  overflow: auto;
 }
 
 .text-frame {
-  padding: 0;
-  overflow: auto;
   display: grid;
   align-content: start;
   gap: 8px;
-}
-
-.text-frame .reader-text,
-.text-frame .reader-notes {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-
-.text-frame .reader-text {
-  padding-top: 12px;
-}
-
-.text-frame .reader-notes {
-  padding-bottom: 12px;
 }
 
 .reader-notes {
@@ -312,8 +298,10 @@ button:disabled {
   padding: 10px;
   display: grid;
   gap: 6px;
-  min-height: calc(100vh - 28px);
-  max-height: calc(100vh - 28px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   overflow: hidden;
   grid-template-rows: auto 1fr;
 }
@@ -329,8 +317,10 @@ button:disabled {
   padding: 16px;
   display: grid;
   gap: 10px;
-  min-height: calc(100vh - 36px);
-  max-height: calc(100vh - 36px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   cursor: pointer;
 }
 
@@ -462,9 +452,9 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 3px 0;
+  padding: 5px 0;
   border-bottom: 1px dashed #e1e7f0;
-  min-height: 28px;
+  min-height: 34px;
 }
 
 .toc-item-title {
@@ -514,8 +504,8 @@ button:disabled {
   }
 
   .toc-list li {
-    min-height: 26px;
-    padding: 2px 0;
+    min-height: 32px;
+    padding: 4px 0;
   }
 
   .toc-jump {
@@ -553,8 +543,9 @@ button:disabled {
     max-height: none;
   }
 
+  .content-frame .slide-visual,
   .text-frame {
-    padding: 0;
+    padding: 10px;
   }
 }
 
