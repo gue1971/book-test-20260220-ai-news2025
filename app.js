@@ -551,8 +551,33 @@ const template = document.getElementById("slideTemplate");
 
 let current = 0; // 0=toc, 1..18=content
 let readerTab = "manga";
+let readerFontSize = 0.94;
+const READER_FONT_MIN = 0.82;
+const READER_FONT_MAX = 1.14;
+const READER_FONT_STEP = 0.06;
 let currentUtterance = null;
 let touchStartX = 0;
+
+function splitIntoParagraphs(text) {
+  const normalized = String(text ?? "").replace(/\r\n/g, "\n").trim();
+  if (!normalized) return [];
+
+  const byBlankLines = normalized.split(/\n{2,}/).map((s) => s.trim()).filter(Boolean);
+  if (byBlankLines.length > 1) return byBlankLines;
+
+  // Fallback: make readable chunks when source has no paragraph breaks.
+  const sentences = normalized.match(/[^。！？!?]+[。！？!?]?/g)?.map((s) => s.trim()).filter(Boolean) ?? [normalized];
+  const chunks = [];
+  let bucket = [];
+  sentences.forEach((s, idx) => {
+    bucket.push(s);
+    if (bucket.length >= 3 || idx === sentences.length - 1) {
+      chunks.push(bucket.join(""));
+      bucket = [];
+    }
+  });
+  return chunks;
+}
 
 const characters = [
   { name: "チャッピー", image: "./character_intro_v5/chappy_intro.jpg", desc: "OpenAI陣営の主役。ChatGPTとGPT-5系、Sora系を背負い、話題化の速さで先手を取る。期待と反発を同時に受けながら、機能更新の密度で主導権を狙う。" },
@@ -595,12 +620,7 @@ function renderCoverPage() {
   titleMain.textContent = "AI覇権バトル2025";
   titleBlock.append(titleMain);
   heroWrap.append(hero, titleBlock);
-
-  const hint = document.createElement("p");
-  hint.className = "cover-hint";
-  hint.textContent = "タップまたはスワイプで次へ";
-
-  paper.append(heroWrap, hint);
+  paper.append(heroWrap);
   wrap.appendChild(paper);
   slideRoot.replaceChildren(wrap);
 }
@@ -719,17 +739,35 @@ function renderContent(pageNumber) {
   const readerNotesWrap = node.querySelector(".reader-notes");
   const readerNoteList = node.querySelector(".reader-note-list");
   const tabButtons = node.querySelectorAll(".reader-tab");
+  const fontDecButton = node.querySelector(".reader-font-dec");
+  const fontIncButton = node.querySelector(".reader-font-inc");
+  const fontButtons = node.querySelectorAll(".reader-font");
   const speakButton = node.querySelector(".reader-speak");
   const currentEntry = readerTexts[index] ?? { novel: "", deepdive: "", notes: [] };
   const currentText = readerTab === "manga" ? "" : (currentEntry?.[readerTab] ?? "");
-  readerTextEl.textContent = currentText;
+  readerTextEl.replaceChildren();
+  if (currentText) {
+    splitIntoParagraphs(currentText).forEach((paragraph) => {
+      const p = document.createElement("p");
+      p.className = "reader-paragraph";
+      p.textContent = paragraph;
+      readerTextEl.appendChild(p);
+    });
+  }
   const showNotes = readerTab === "deepdive" && Array.isArray(currentEntry.notes) && currentEntry.notes.length > 0;
   const showManga = readerTab === "manga" && Boolean(imagePath);
+  const showReaderFontControls = readerTab !== "manga";
   readerNotesWrap.hidden = !showNotes;
   textFrameEl.hidden = showManga;
   visual.hidden = !showManga || !Boolean(imagePath);
   speakButton.disabled = showManga;
   speakButton.style.opacity = showManga ? "0.45" : "1";
+  textFrameEl.style.setProperty("--reader-font-size", `${readerFontSize}rem`);
+  fontButtons.forEach((btn) => {
+    btn.hidden = !showReaderFontControls;
+  });
+  fontDecButton.disabled = !showReaderFontControls || readerFontSize <= READER_FONT_MIN;
+  fontIncButton.disabled = !showReaderFontControls || readerFontSize >= READER_FONT_MAX;
   readerNoteList.replaceChildren();
   if (showNotes) {
     currentEntry.notes.forEach((note) => {
@@ -745,6 +783,16 @@ function renderContent(pageNumber) {
       stopSpeaking();
       renderContent(current);
     });
+  });
+
+  fontDecButton.addEventListener("click", () => {
+    readerFontSize = Math.max(READER_FONT_MIN, Number((readerFontSize - READER_FONT_STEP).toFixed(2)));
+    renderContent(current);
+  });
+
+  fontIncButton.addEventListener("click", () => {
+    readerFontSize = Math.min(READER_FONT_MAX, Number((readerFontSize + READER_FONT_STEP).toFixed(2)));
+    renderContent(current);
   });
 
   speakButton.addEventListener("click", () => {
