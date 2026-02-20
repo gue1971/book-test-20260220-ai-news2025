@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI覇権バトル2025</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <article id="slide" class="slide" aria-live="polite"></article>
+    </main>
+
+    <template id="slideTemplate">
+      <div class="panel">
+        <div class="chip-row">
+          <span class="chip era"></span>
+          <span class="chip impact"></span>
+          <span class="chip-temp-title"></span>
+          <span class="page-counter"></span>
+        </div>
+        <figure class="slide-visual" hidden>
+          <img class="slide-image" alt="" loading="lazy" />
+        </figure>
+        <section class="reader">
+          <div class="reader-head">
+            <div class="reader-actions">
+              <button type="button" class="ghost reader-tab" data-tab="novel">物語</button>
+              <button type="button" class="ghost reader-tab" data-tab="deepdive">解説</button>
+              <button type="button" class="ghost reader-speak" aria-label="読み上げ">🔊</button>
+            </div>
+          </div>
+          <p class="reader-text"></p>
+          <section class="reader-notes" hidden>
+            <ul class="reader-note-list"></ul>
+          </section>
+        </section>
+      </div>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
