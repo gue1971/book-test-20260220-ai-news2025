@@ -680,9 +680,17 @@ function renderContent(pageNumber) {
   tempTitle.textContent = `${index + 1}. ${data.title}`;
   const pageCounter = node.querySelector(".page-counter");
   pageCounter.textContent = `${index + 1}/${slides.length}`;
-  pageCounter.title = "目次へ";
-  pageCounter.style.cursor = "pointer";
-  pageCounter.addEventListener("click", () => goTo(2));
+
+  const readerEra = node.querySelector(".reader-era");
+  const readerImpact = node.querySelector(".reader-impact");
+  const readerTitle = node.querySelector(".reader-title");
+  const readerPageCounter = node.querySelector(".reader-page-counter");
+  readerEra.textContent = data.era;
+  readerImpact.textContent = String(data.impact).includes("★") ? data.impact : "";
+  readerTitle.textContent = `${index + 1}. ${data.title}`;
+  readerPageCounter.textContent = `${index + 1}/${slides.length}`;
+  readerPageCounter.title = "目次へ";
+  readerPageCounter.addEventListener("click", () => goTo(2));
 
   const visual = node.querySelector(".slide-visual");
   const image = node.querySelector(".slide-image");
