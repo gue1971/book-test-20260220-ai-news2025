@@ -558,6 +558,11 @@ const READER_FONT_STEP = 0.06;
 let currentUtterance = null;
 let touchStartX = 0;
 
+function isInteractiveTarget(target) {
+  if (!(target instanceof Element)) return false;
+  return Boolean(target.closest("button, a, input, textarea, select, label, [role='button']"));
+}
+
 function splitIntoParagraphs(text) {
   const normalized = String(text ?? "").replace(/\r\n/g, "\n").trim();
   if (!normalized) return [];
@@ -854,6 +859,20 @@ window.addEventListener("touchend", (event) => {
   if (Math.abs(dx) < 50) return;
   if (dx < 0) goTo(current + 1);
   if (dx > 0) goTo(current - 1);
+});
+
+slideRoot.addEventListener("click", (event) => {
+  if (current < 1) return; // start from character page
+  if (isInteractiveTarget(event.target)) return;
+
+  const rect = slideRoot.getBoundingClientRect();
+  const tapX = event.clientX - rect.left;
+  const half = rect.width / 2;
+  if (tapX < half) {
+    goTo(current - 1);
+  } else {
+    goTo(current + 1);
+  }
 });
 
 goTo(0);
