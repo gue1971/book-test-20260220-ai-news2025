@@ -119,10 +119,12 @@ body {
   background: #f8fbff;
   border-radius: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 0;
   min-height: 100vh;
-  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 100dvh;
 }
 
 .reader-controls {
@@ -131,6 +133,7 @@ body {
   padding: 8px 10px;
   display: grid;
   gap: 6px;
+  margin: 0;
 }
 
 .reader-meta {
@@ -169,10 +172,8 @@ body {
 }
 
 .reader-page-counter {
-  position: fixed;
-  right: 8px;
-  bottom: 8px;
-  z-index: 20;
+  position: static;
+  margin-left: auto;
   min-height: 22px;
   min-width: 40px;
   padding: 0 6px;
@@ -218,24 +219,30 @@ body {
 }
 
 .content-frame {
-  border: 0;
+  border: 1px solid #d8e0ea;
+  border-bottom: 0;
   background: #ffffff;
   min-height: 0;
   max-height: none;
   overflow: hidden;
   padding: 0;
   margin: 0;
+  height: clamp(360px, 62dvh, 760px);
 }
 
 .content-frame .slide-visual,
 .text-frame {
   width: 100%;
   height: 100%;
-  padding: 12px;
   overflow: auto;
 }
 
+.content-frame .slide-visual {
+  padding: 0;
+}
+
 .text-frame {
+  padding: 12px;
   display: grid;
   align-content: start;
   gap: 8px;
@@ -295,7 +302,7 @@ button:disabled {
   border-radius: 0;
   background: #fffdf8;
   box-shadow: none;
-  padding: 10px;
+  padding: 12px 18px;
   display: grid;
   gap: 6px;
   min-height: 100vh;
@@ -431,7 +438,7 @@ button:disabled {
   border: 1px solid #dbe3ef;
   background: #f8fbff;
   border-radius: 12px;
-  padding: 8px 10px;
+  padding: 10px 12px;
   min-height: 0;
   overflow: hidden;
 }
@@ -492,7 +499,7 @@ button:disabled {
   }
 
   .toc-page {
-    padding: 8px;
+    padding: 10px 14px;
   }
 
   .toc-list {
@@ -527,7 +534,7 @@ button:disabled {
   }
 
   .toc-list-wrap {
-    padding: 6px 8px;
+    padding: 8px 10px;
   }
 
   .toc-item-title {
@@ -541,9 +548,13 @@ button:disabled {
   .content-frame {
     min-height: 0;
     max-height: none;
+    height: clamp(340px, 58dvh, 620px);
   }
 
-  .content-frame .slide-visual,
+  .content-frame .slide-visual {
+    padding: 0;
+  }
+
   .text-frame {
     padding: 10px;
   }
