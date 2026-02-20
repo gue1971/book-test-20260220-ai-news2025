@@ -14,17 +14,6 @@
     <template id="slideTemplate">
       <div class="panel">
         <section class="reader">
-          <div class="reader-head">
-            <div class="reader-meta">
-              <span class="reader-era"></span><span class="reader-impact"></span><span class="reader-title"></span><button type="button" class="ghost reader-page-counter"></button>
-            </div>
-            <div class="reader-actions">
-              <button type="button" class="ghost reader-tab" data-tab="manga">マンガ</button>
-              <button type="button" class="ghost reader-tab" data-tab="novel">物語</button>
-              <button type="button" class="ghost reader-tab" data-tab="deepdive">解説</button>
-              <button type="button" class="ghost reader-speak" aria-label="読み上げ">🔊</button>
-            </div>
-          </div>
           <section class="content-frame">
             <figure class="slide-visual" hidden>
               <img class="slide-image" alt="" loading="lazy" />
@@ -36,6 +25,20 @@
               </section>
             </div>
           </section>
+          <div class="reader-controls">
+            <div class="reader-actions">
+              <button type="button" class="ghost reader-tab" data-tab="manga">マンガ</button>
+              <button type="button" class="ghost reader-tab" data-tab="novel">物語</button>
+              <button type="button" class="ghost reader-tab" data-tab="deepdive">解説</button>
+              <button type="button" class="ghost reader-speak" aria-label="読み上げ">🔊</button>
+            </div>
+            <div class="reader-meta">
+              <span class="reader-era"></span>
+              <span class="reader-impact"></span>
+              <span class="reader-title"></span>
+            </div>
+          </div>
+          <button type="button" class="ghost reader-page-counter"></button>
         </section>
       </div>
     </template>
