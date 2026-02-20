@@ -550,7 +550,7 @@ const slideRoot = document.getElementById("slide");
 const template = document.getElementById("slideTemplate");
 
 let current = 0; // 0=toc, 1..18=content
-let readerTab = "novel";
+let readerTab = "manga";
 let currentUtterance = null;
 let touchStartX = 0;
 
@@ -672,15 +672,6 @@ function renderContent(pageNumber) {
   const data = slides[index];
   const node = template.content.firstElementChild.cloneNode(true);
 
-  node.querySelector(".era").textContent = data.era;
-  const impactEl = node.querySelector(".impact");
-  impactEl.textContent = data.impact;
-  impactEl.hidden = !String(data.impact).includes("★");
-  const tempTitle = node.querySelector(".chip-temp-title");
-  tempTitle.textContent = `${index + 1}. ${data.title}`;
-  const pageCounter = node.querySelector(".page-counter");
-  pageCounter.textContent = `${index + 1}/${slides.length}`;
-
   const readerEra = node.querySelector(".reader-era");
   const readerImpact = node.querySelector(".reader-impact");
   const readerTitle = node.querySelector(".reader-title");
@@ -706,15 +697,21 @@ function renderContent(pageNumber) {
     visual.hidden = true;
   }
   const readerTextEl = node.querySelector(".reader-text");
+  const textFrameEl = node.querySelector(".text-frame");
   const readerNotesWrap = node.querySelector(".reader-notes");
   const readerNoteList = node.querySelector(".reader-note-list");
   const tabButtons = node.querySelectorAll(".reader-tab");
   const speakButton = node.querySelector(".reader-speak");
   const currentEntry = readerTexts[index] ?? { novel: "", deepdive: "", notes: [] };
-  const currentText = currentEntry?.[readerTab] ?? "";
+  const currentText = readerTab === "manga" ? "" : (currentEntry?.[readerTab] ?? "");
   readerTextEl.textContent = currentText;
   const showNotes = readerTab === "deepdive" && Array.isArray(currentEntry.notes) && currentEntry.notes.length > 0;
+  const showManga = readerTab === "manga" && Boolean(imagePath);
   readerNotesWrap.hidden = !showNotes;
+  textFrameEl.hidden = showManga;
+  visual.hidden = !showManga || !Boolean(imagePath);
+  speakButton.disabled = showManga;
+  speakButton.style.opacity = showManga ? "0.45" : "1";
   readerNoteList.replaceChildren();
   if (showNotes) {
     currentEntry.notes.forEach((note) => {
@@ -733,6 +730,7 @@ function renderContent(pageNumber) {
   });
 
   speakButton.addEventListener("click", () => {
+    if (readerTab === "manga") return;
     if (!("speechSynthesis" in window)) {
       alert("このブラウザは読み上げに対応していません。");
       return;

@@ -13,32 +13,28 @@
 
     <template id="slideTemplate">
       <div class="panel">
-        <div class="chip-row">
-          <span class="chip era"></span>
-          <span class="chip impact"></span>
-          <span class="chip-temp-title"></span>
-          <span class="page-counter"></span>
-        </div>
-        <figure class="slide-visual" hidden>
-          <img class="slide-image" alt="" loading="lazy" />
-        </figure>
         <section class="reader">
           <div class="reader-head">
             <div class="reader-meta">
-              <span class="reader-era"></span>
-              <span class="reader-impact"></span>
-              <span class="reader-title"></span>
-              <button type="button" class="ghost reader-page-counter"></button>
+              <span class="reader-era"></span><span class="reader-impact"></span><span class="reader-title"></span><button type="button" class="ghost reader-page-counter"></button>
             </div>
             <div class="reader-actions">
+              <button type="button" class="ghost reader-tab" data-tab="manga">マンガ</button>
               <button type="button" class="ghost reader-tab" data-tab="novel">物語</button>
               <button type="button" class="ghost reader-tab" data-tab="deepdive">解説</button>
               <button type="button" class="ghost reader-speak" aria-label="読み上げ">🔊</button>
             </div>
           </div>
-          <p class="reader-text"></p>
-          <section class="reader-notes" hidden>
-            <ul class="reader-note-list"></ul>
+          <section class="content-frame">
+            <figure class="slide-visual" hidden>
+              <img class="slide-image" alt="" loading="lazy" />
+            </figure>
+            <div class="text-frame" hidden>
+              <p class="reader-text"></p>
+              <section class="reader-notes" hidden>
+                <ul class="reader-note-list"></ul>
+              </section>
+            </div>
           </section>
         </section>
       </div>
