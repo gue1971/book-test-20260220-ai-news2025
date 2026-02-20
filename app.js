@@ -576,6 +576,12 @@ function renderCoverPage() {
   wrap.className = "cover-page";
   wrap.addEventListener("click", () => goTo(1));
 
+  const paper = document.createElement("section");
+  paper.className = "page-paper";
+
+  const heroWrap = document.createElement("section");
+  heroWrap.className = "cover-hero-wrap";
+
   const hero = document.createElement("img");
   hero.className = "cover-hero";
   hero.src = "./cover_art/cover_art_v10.jpg";
@@ -588,12 +594,14 @@ function renderCoverPage() {
   titleMain.className = "cover-title-main";
   titleMain.textContent = "AI覇権バトル2025";
   titleBlock.append(titleMain);
+  heroWrap.append(hero, titleBlock);
 
   const hint = document.createElement("p");
   hint.className = "cover-hint";
   hint.textContent = "タップまたはスワイプで次へ";
 
-  wrap.append(titleBlock, hero, hint);
+  paper.append(heroWrap, hint);
+  wrap.appendChild(paper);
   slideRoot.replaceChildren(wrap);
 }
 
@@ -601,9 +609,12 @@ function renderCastPage() {
   const wrap = document.createElement("section");
   wrap.className = "toc-page";
 
+  const paper = document.createElement("section");
+  paper.className = "page-paper page-paper-toc";
+
   const title = document.createElement("h1");
   title.textContent = "キャラクター紹介";
-  wrap.appendChild(title);
+  paper.appendChild(title);
 
   const cast = document.createElement("section");
   cast.className = "toc-cast";
@@ -624,23 +635,28 @@ function renderCastPage() {
     card.append(img, meta);
     cast.appendChild(card);
   });
-  wrap.appendChild(cast);
+  paper.appendChild(cast);
 
   const hint = document.createElement("p");
   hint.className = "cast-hint";
   hint.textContent = "次へめくると目次";
-  wrap.appendChild(hint);
+  paper.appendChild(hint);
+
+  wrap.appendChild(paper);
 
   slideRoot.replaceChildren(wrap);
 }
 
 function renderTocPage() {
   const wrap = document.createElement("section");
-  wrap.className = "toc-page";
+  wrap.className = "toc-page toc-page-list";
+
+  const paper = document.createElement("section");
+  paper.className = "page-paper page-paper-toc";
 
   const title = document.createElement("h1");
   title.textContent = "目次";
-  wrap.append(title);
+  paper.append(title);
 
   const listWrap = document.createElement("section");
   listWrap.className = "toc-list-wrap";
@@ -662,7 +678,9 @@ function renderTocPage() {
     list.appendChild(li);
   });
   listWrap.append(list);
-  wrap.appendChild(listWrap);
+  paper.appendChild(listWrap);
+
+  wrap.appendChild(paper);
 
   slideRoot.replaceChildren(wrap);
 }
