@@ -192,7 +192,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.reader-page-counter {
+.btn.reader-page-counter {
   position: static;
   margin-left: auto;
   min-height: 22px;
@@ -206,6 +206,7 @@ body {
   font-weight: 500;
   box-shadow: none;
   opacity: 0.88;
+  cursor: pointer;
 }
 
 .reader-actions {
