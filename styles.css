@@ -201,7 +201,7 @@ body {
   font-size: 0.72rem;
   border: 0;
   border-radius: 0;
-  background: var(--controls-bg);
+  background: transparent;
   color: #475569;
 }
 
@@ -310,6 +310,8 @@ body {
 }
 
 .btn {
+  -webkit-appearance: none;
+  appearance: none;
   border: 2px solid #1f1f1f;
   border-radius: 12px;
   background: #f7b538;

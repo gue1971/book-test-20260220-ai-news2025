@@ -1,4 +1,4 @@
-const CACHE_NAME = "ai-news-pwa-v1";
+const CACHE_NAME = "ai-news-pwa-v2";
 
 const CORE_ASSETS = [
   "./",
