@@ -338,6 +338,11 @@ button:disabled {
   border-color: #727272;
 }
 
+.reader-page-counter.ghost {
+  background: var(--controls-bg);
+  border-color: transparent;
+}
+
 .toc-page {
   border: 0;
   border-radius: 0;
