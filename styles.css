@@ -205,10 +205,6 @@ body {
   color: #475569;
 }
 
-.reader-page-counter:hover {
-  filter: none;
-}
-
 .reader-actions {
   display: flex;
   gap: 6px;
@@ -313,7 +309,7 @@ body {
   color: #334155;
 }
 
-button {
+.btn {
   border: 2px solid #1f1f1f;
   border-radius: 12px;
   background: #f7b538;
@@ -324,23 +320,22 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.btn:hover {
   filter: brightness(0.97);
 }
 
-button:disabled {
+.btn.reader-page-counter:hover {
+  filter: none;
+}
+
+.btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.ghost {
+.btn-ghost {
   background: #ffffff;
   border-color: #727272;
-}
-
-.reader-page-counter.ghost {
-  background: var(--controls-bg);
-  border-color: transparent;
 }
 
 .toc-page {

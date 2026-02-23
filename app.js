@@ -148,7 +148,7 @@ function renderTocPage() {
     text.textContent = `${i + 1}. ${slide.title}`;
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "ghost toc-jump";
+    button.className = "btn btn-ghost toc-jump";
     button.textContent = "→";
     button.setAttribute("aria-label", `${i + 1}ページへ移動`);
     button.addEventListener("click", () => goTo(i + 3));
