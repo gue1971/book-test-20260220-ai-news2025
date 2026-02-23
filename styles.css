@@ -5,7 +5,7 @@
   --safe-vh: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   --stage-width: min(100vw, calc(var(--safe-vh) * 9 / 16));
   --stage-height: calc(var(--stage-width) * 16 / 9);
-  --controls-block-height: 104px;
+  --controls-block-height: 120px;
   --story-stack-height: var(--stage-height);
   --deck-bg: #000000;
   --accent: #005f73;
@@ -606,7 +606,7 @@ button:disabled {
 
 @media (max-width: 420px) {
   :root {
-    --controls-block-height: 96px;
+    --controls-block-height: 120px;
     --stage-width: 100vw;
   }
 
